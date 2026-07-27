@@ -1,242 +1,98 @@
 <!DOCTYPE html>
-<html lang="rw">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kwegereza Islam Umuryango – E-Learning</title>
-<!-- <meta http-equiv="refresh" content="3"> -->
-<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Playfair+Display:wght@600;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-<link rel="stylesheet" href="{{ URL::to('/') }}/Guest/assets/style.css" />
-<style>
-  .modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.6);
-  z-index:9999;
-  align-items:center;
-  justify-content:center;
-}
-
-.modal-content{
-  background:#fff;
-  width:90%;
-  max-width:420px;
-  padding:25px;
-  border-radius:14px;
-  position:relative;
-}
-
-.closeBtn{
-  position:absolute;
-  right:15px;
-  top:10px;
-  font-size:28px;
-  cursor:pointer;
-}
-
-.join-btn{
-  margin-top:15px;
-  width:100%;
-  padding:12px;
-  border:none;
-  border-radius:10px;
-  background:#0b6d20;
-  color:#fff;
-  cursor:pointer;
-}
-</style>
+<title>Web-Based Witness Management System Case Study: RIB | Umutekano</title>
+<!-- <link rel="stylesheet" href="{{ URL::to('/') }}/Guest/assets/styles.css"> -->
+<link rel="stylesheet" href="{{ asset('Guest/assets/styles.css') }}">
 </head>
 <body>
 
-<!-- TOP BAR -->
-<div class="topbar">
-  <div class="left">
-    <span><i class="fa fa-phone"></i> (+250) 723061482</span>
-    <span><i class="fa fa-envelope"></i>  umuryangok@gmail.com</span>
-    <!-- <span><i class="fa fa-globe"></i> Rwandcba</span> -->
-  </div>
-  <div class="right">
-    
-    <a href="{{ route('owner.login') }}" 
-       class="btn-account hidden md:inline-flex items-center gap-2">
-       <i class="fas fa-user"></i> Account
-    </a>
-
-    <a href="{{ route('guest.home') }}#twandikire" 
-       class="btn-account hidden md:inline-flex items-center gap-2">
-       <i class="fas fa-phone"></i> Twandikire
-    </a>
-  </div>
-</div>
-
-<!-- NAVBAR -->
-<div class="navbar">
-  <div class="nav-inner">
-    <div class="logo-box">
-      <img src="{{ URL::to('/') }}/Guest/images/logo.png" alt="K.I.U Logo"
-           onerror="this.style.background='#0B3D2E';this.src='';this.alt='KIU'">
-      <div class="logo-text">
-        <h2>K.I.U</h2>
-        <p>Kwegereza Islam Umuryango</p>
+<header class="nav">
+  <div class="container nav-row">
+    <a href="index.html" class="brand">
+      <svg class="brand-mark" viewBox="0 0 36 36" fill="none">
+        <rect x="1" y="1" width="34" height="34" rx="9" fill="#17335C"/>
+        <path d="M18 6 L28 10 V17.5 C28 24.5 23.5 28.7 18 30 C12.5 28.7 8 24.5 8 17.5 V10 L18 6Z" stroke="#fff" stroke-width="1.6" fill="none"/>
+        <path d="M13.5 18 L16.7 21.2 L23 14.5" stroke="#D99A2B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+      <div>
+        <div class="brand-name">Web-Based Witness<span> MS</span></div>
+        <div class="brand-sub">RIB Witness Portal</div>
       </div>
-    </div>
+    </a>
 
     <nav class="nav-links">
-      <a href="{{ route('guest.home') }}#ahabanza" class="{{Request::segment(1) == '' ? 'active' : ''}}"><i class="fas fa-home"></i> Ahabanza</a>
-      <a href="{{ route('guest.home') }}#abo-turi-bo"><i class="fas fa-info-circle"></i> Abo-turibo</a>
-      <!-- <a href="{{ route('guest.home') }}#abo-turi-bo"><i class="fas fa-info-circle"></i>Ibibazo</a> -->
-      <div onclick="window.location.href='{{ route("guest.teachers") }}'">
-        <a href="#" class="{{Request::segment(1) == 'abasheikh' ? 'active' : ''}}">
-          <i class="fas fa-users"></i> Abarimu
-        </a>
-      </div>
-
-      <a href="{{ route('guest.inyandiko_zabamenyi') }}" class="{{Request::segment(1) == 'inyandiko-zabamenyi' ? 'active' : ''}}">
-        <i class="fas fa-pen"></i> Inyandiko z'abamenyi
-      </a>
-
-      <a href="{{ route('guest.news') }}" class="{{Request::segment(1) == 'amatangazo' ? 'active' : ''}}">
-        <i class="fas fa-bullhorn"></i> Amatangazo
-      </a>
-
-      <a href="{{ route('guest.books') }}" class="{{Request::segment(1) == 'ibitabo' ? 'active' : ''}}">
-        <i class="fas fa-book"></i> Ibitabo
-      </a>
-
+      <a href="#about">About</a>
+      <a href="#features">Platform</a>
+      <a href="#how-it-works">How it works</a>
+      <a href="#security">Security</a>
+      <a href="login.html" class="mobile-only-link">Log in</a>
+      <a href="register.html" class="mobile-only-link">Report a crime</a>
     </nav>
 
-    <div class="nav-right flex">
-  
-      <!-- Chat Notification -->
-      <span id="chatBtn" class="chat-icon">
-         <i class="fa fa-microphone"></i>
-      </span>
-
-      <span id="searchBtn" onclick="window.location.href='{{ route("guest.search") }}'" class="flex" style="font-weight: bold; margin-right: 10px; color:var(--green); cursor:pointer;opacity: 0.7;">
-        <p>Search</p>&nbsp;<i class="fa fa-search"></i>
-      </span>
-
-      <div class="hamburger" id="menuBtn">
-        <i class="fas fa-bars"></i>
-      </div>
-
+    <div class="nav-actions">
+      <a href="login.html" class="btn btn-ghost">Log in</a>
+      <a href="register.html" class="btn btn-primary">Report a crime</a>
     </div>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
   </div>
+</header>
 
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="{{route('guest.home')}}#ahabanza" class="{{Request::segment(1) == '' ? 'active' : ''}}"><i class="fas fa-home"></i> Ahabanza</a>
-    <a href="{{route('guest.home')}}#abo-turi-bo"><i class="fas fa-info-circle"></i> Abo-turibo</a>
-      <div onclick="window.location.href='{{ route("guest.teachers") }}'" >
-        <p style="margin-left: -1%;font-weight: bold;" class="{{Request::segment(1) == 'abasheikh' ? 'active' : ''}}"><i class="fas fa-users"></i> Abarimu</p>
-      </div>
-
-      <a href="{{ route('guest.inyandiko_zabamenyi') }}" class="{{Request::segment(1) == 'inyandiko-zabamenyi' ? 'active' : ''}}"><i class="fas fa-pencil"></i> Inyandiko z'abamenyi</a>
-      <a href="{{ route('guest.news') }}" class="{{Request::segment(1) == 'amatangazo' ? 'active' : ''}}"><i class="fas fa-bullhorn"></i> Amatangazo</a>
-      <a href="{{ route('guest.books') }}" class="{{Request::segment(1) == 'ibitabo' ? 'active' : ''}}"><i class="fas fa-book"></i> Ibitabo</a>
-    <a href="{{ route('guest.home') }}#twandikire"><i class="fas fa-phone"></i> Twandikire</a>
-    <a href="{{ route('owner.login') }}" class="btn-donate hidden sm:hidden"><i class="fas fa-user"></i>Account</a>
-  </div>
-</div>
-
-
-<!-- DAILY AYAH + HADITH -->
-<div class="daily-strip container" style="padding-top:40px;">
-  <div class="daily-card">
-    <h4><i class="fas fa-users"></i>,<i class="fas fa-eye"></i> &nbsp;System status</h4>
-    <div class="trans">System-users : 0</div>
-    <div class="trans">Today's visit : 0</div>
-    <div class="trans">All-visits : 0</div>    
-  </div>
-
-</div>
-
-
-<!-- Modal -->
-<div id="classModal" class="modal">
-  <div class="modal-content">
-
-    <span class="closeBtn" style="margin-top:-3px;color: red;">&times;</span>
-
-    <h2 >📚 Mwinjire twige</h2>
-    <hr>
-    <p>
-      Isomo turibwige uyumunsi ni Hadith , turi bugezweho na <b>Sheikh IRADUKUNDA ABOUBAKAR ABUU ABDILRAHMAN</b>
-    </p>
-
-    <button class="join-btn">Ni mukanya</button>
-
-  </div>
-</div>
-
+<main>
   @yield('content')
+</main>
 
-<!-- FOOTER -->
-<div class="footer-gold"></div>
-<footer>
-  <div class="footer-inner">
-    <div>
-      <h4>Twandikire</h4>
-      <p><i class="fa fa-phone"></i> (+250) 723061482</p>
-      <p><i class="fa fa-envelope"></i> umuryangok@gmail.com</p>
-      <p><i class="fa fa-location-dot"></i> Rwanda</p>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="brand">
+          <svg class="brand-mark" viewBox="0 0 36 36" fill="none">
+            <rect x="1" y="1" width="34" height="34" rx="9" fill="#17335C"/>
+            <path d="M18 6 L28 10 V17.5 C28 24.5 23.5 28.7 18 30 C12.5 28.7 8 24.5 8 17.5 V10 L18 6Z" stroke="#fff" stroke-width="1.6" fill="none"/>
+          </svg>
+          <div class="brand-name">Web-Based Witness<span> MS</span></div>
+        </div>
+        <p class="footer-desc">A secure witness management platform built for the Rwanda Investigation Bureau.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Platform</h5>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#how-it-works">How it works</a></li>
+          <li><a href="#security">Security</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Account</h5>
+        <ul>
+          <li><a href="login.html">Log in</a></li>
+          <li><a href="register.html">Create account</a></li>
+          <li><a href="forgot-password.html">Reset password</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Rwanda Investigation Bureau</h5>
+        <ul>
+          <li><a href="#">Official RIB site</a></li>
+          <li><a href="#">Emergency contacts</a></li>
+          <li><a href="#">Report anonymously</a></li>
+        </ul>
+      </div>
     </div>
-    <div>
-      <h4>Aho tugana</h4>
-      <a href="#ahabanza"><i class="fas fa-home"></i> Ahabanza</a>
-      <!-- <a href="#abo-turi-bo"><i class="fas fa-info-circle"></i> Abo-turibo</a> -->
-      <a href="#amasomo"><i class="fas fa-graduation-cap"></i> Amasomo</a>
-      <a href="#ibitabo"><i class="fas fa-book"></i> Ibitabo</a>
+    <div class="footer-bottom">
+      <span>© 2026 Rwanda Investigation Bureau. All rights reserved.</span>
+      <span>Web-based witness MS Portal built for confidential public safety reporting.</span>
     </div>
-    <div>
-      <h4>Imbuga nkoranya mbaga</h4>
-      <a href="https://t.me/kwegereza" target="_blank"><i class="fab fa-telegram"></i> Telegram</a>
-      <a href="https://www.facebook.com/groups/171182813976386/" target="_blank"><i class="fab fa-facebook"></i> Facebook</a>
-      <a href="https://chat.whatsapp.com/G87ZLng06dJJA4rqV7DQsS" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-      <a href="https://youtube.com/@kwegereza" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p><strong>KWEGEREZA ISLAM UMURYANGO</strong> &nbsp;|&nbsp; تقريب السنة بين يدي الأمة</p>
-    <p style="margin-top:6px;">&copy; 2026 K.I.U </p>
   </div>
 </footer>
 
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-
-    const chatBtn  = document.getElementById("chatBtn");
-    const modal    = document.getElementById("classModal");
-    const closeBtn = document.querySelector(".closeBtn");
-
-    // open modal
-    if(chatBtn && modal){
-        chatBtn.addEventListener("click", function () {
-            modal.style.display = "flex";
-        });
-    }
-
-    // close button
-    if(closeBtn){
-        closeBtn.addEventListener("click", function () {
-            modal.style.display = "none";
-        });
-    }
-
-    // click outside
-    window.addEventListener("click", function (e) {
-        if (e.target === modal) {
-            modal.style.display = "none";
-        }
-    });
-
-});
-</script>
-<!-- <script src="assets/script.js"></script> -->
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="{{ URL::to('/') }}/Guest/assets/script.js"></script>
-
+<!-- <script src="{{ URL::to('/') }}/Guest/assets/script.js"></script> -->
+<script src="{{ asset('Guest/assets/script.js') }}"></script>
 </body>
 </html>

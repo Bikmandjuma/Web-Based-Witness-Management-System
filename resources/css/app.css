@@ -1,0 +1,7 @@
+/* app.css or app.js - Make sure the import comes before any Tailwind directives */
+@import 'node_modules/toastr/build/toastr.min.css';
+
+/* Then your Tailwind directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

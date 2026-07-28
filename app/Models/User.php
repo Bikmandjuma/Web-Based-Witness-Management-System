@@ -2,70 +2,70 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
-use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable implements JWTSubject{
-    
-    protected $table='users';
-    protected $guarded = array();
-    use HasApiTokens, HasFactory, Notifiable;
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable=[
-        'id',
-        'user_code',
-        'user_name',
-        'provider_name',
-        'provider_id',
-        'provider_token',
-        'firstname',
-        'lastname',
+class User extends Authenticatable
+{
+    use HasFactory, Notifiable;
+
+    protected $fillable = [
+        'full_name',
+        'name', // kept as an alias so any existing view using {{ $user->name }} still works
         'email',
-        'image',
-        'gender',
         'phone',
-        'birthdate',
         'password',
-        'last_active_at'
+        'role',
+        'is_active',
     ];
-
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-
 
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-        'password' => 'hashed',
-    ];
-
-     public function getJWTIdentifier()
+    protected function casts(): array
     {
-        return $this->getKey();
+        return [
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
+            'is_active' => 'boolean',
+        ];
     }
 
-    public function getJWTCustomClaims()
+    // ---------- role helpers ----------
+    public function isWitness(): bool
     {
-        return [];
+        return $this->role === 'witness';
+    }
+
+    public function isInvestigator(): bool
+    {
+        return $this->role === 'investigator';
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+
+    // ---------- relationships ----------
+
+    /** Reports filed by this user, when they are a witness. */
+    public function reports()
+    {
+        return $this->hasMany(Report::class);
+    }
+
+    /** Reports assigned to this user, when they are an investigator. */
+    public function assignedReports()
+    {
+        return $this->hasMany(Report::class, 'assigned_investigator_id');
+    }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class, 'sender_id');
     }
 }

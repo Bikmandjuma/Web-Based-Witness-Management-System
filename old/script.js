@@ -55,53 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ---------- generic client-side validation ---------- */
-  document.querySelectorAll('form[data-validate]').forEach(form => {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      let valid = true;
-
-      form.querySelectorAll('[required]').forEach(input => {
-        const field = input.closest('.field');
-        if (!field) return;
-        let ok = input.value.trim().length > 0;
-
-        if (ok && input.type === 'email') {
-          ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value.trim());
-        }
-        if (ok && input.dataset.match) {
-          const other = form.querySelector(input.dataset.match);
-          if (other) ok = other.value === input.value;
-        }
-        if (ok && input.type === 'checkbox') {
-          ok = input.checked;
-        }
-
-        field.classList.toggle('invalid', !ok);
-        if (!ok) valid = false;
-      });
-
-      if (valid) {
-        const successHandler = form.dataset.onSuccess;
-        if (successHandler && typeof window[successHandler] === 'function') {
-          window[successHandler](form);
-        } else {
-          form.classList.add('hidden');
-          const done = form.parentElement.querySelector('[data-success-panel]');
-          if (done) done.classList.remove('hidden');
-        }
-      }
-    });
-
-    // clear invalid state as the person types
-    form.querySelectorAll('input').forEach(input => {
-      input.addEventListener('input', () => {
-        const field = input.closest('.field');
-        if (field) field.classList.remove('invalid');
-      });
-    });
-  });
-
 });
 
 /* ---------- helpers ---------- */

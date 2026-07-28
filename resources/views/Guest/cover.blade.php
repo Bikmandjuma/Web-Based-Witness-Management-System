@@ -28,13 +28,13 @@
       <a href="#features">Platform</a>
       <a href="#how-it-works">How it works</a>
       <a href="#security">Security</a>
-      <a href="login.html" class="mobile-only-link">Log in</a>
-      <a href="register.html" class="mobile-only-link">Report a crime</a>
+      <a href="{{ route('login') }}" class="mobile-only-link">Log in</a>
+      <a href="{{ route('register') }}" class="mobile-only-link">Report a crime</a>
     </nav>
 
     <div class="nav-actions">
-      <a href="login.html" class="btn btn-ghost">Log in</a>
-      <a href="register.html" class="btn btn-primary">Report a crime</a>
+      <a href="{{ route('login') }}" class="btn btn-ghost">Log in</a>
+      <a href="{{ route('register') }}" class="btn btn-primary">Report a crime</a>
     </div>
     <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
@@ -71,9 +71,9 @@
       <div class="footer-col">
         <h5>Account</h5>
         <ul>
-          <li><a href="login.html">Log in</a></li>
-          <li><a href="register.html">Create account</a></li>
-          <li><a href="forgot-password.html">Reset password</a></li>
+          <li><a href="{{ route('login') }}">Log in</a></li>
+          <li><a href="{{ route('register') }}">Create account</a></li>
+          <li><a href="{{ route('forgot-password') }}">Reset password</a></li>
         </ul>
       </div>
       <div class="footer-col">

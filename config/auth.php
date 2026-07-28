@@ -10,21 +10,6 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'owners',
-        ],
-
-        'owner' => [
-            'driver' => 'session',
-            'provider' => 'owners',
-        ],
-
-        'api' => [
-            'driver' => 'jwt',
-            'provider' => 'users',
-        ],
-
-        'user' => [
-            'driver' => 'jwt',
             'provider' => 'users',
         ],
     ],
@@ -33,11 +18,6 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
-        ],
-
-        'owners' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Owner::class,
         ],
     ],
 

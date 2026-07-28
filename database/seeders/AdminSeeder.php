@@ -1,28 +1,57 @@
 <?php
 
 namespace Database\Seeders;
-use App\Models\Owner;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class AdminSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Creates one starter account per role so you can log in and test
+     * each dashboard immediately after migrating. Change these passwords
+     * (or delete these accounts) before deploying anywhere real.
      */
-    
     public function run(): void
     {
-        Owner::create([
-            'firstname' => 'Bikman',
-            'lastname' =>'Djuma',
-            'gender' => 'male',
-            'phone' => '0785389000',
-            'email' => 'ntiruhungwab@gmail.com',
-            'role' => 'superAdmin',
-            'image' => 'user.png',
-            'dob' => '1994-12-20',
-            'password' => bcrypt('bugarama'),
-        ]);
+        User::firstOrCreate(
+            ['email' => 'admin@umutekano.test'],
+            [
+                'full_name' => 'RIB Administrator',
+                'name' => 'RIB Administrator',
+                'phone' => '0780000001',
+                'role' => 'admin',
+                'is_active' => true,
+                'email_verified_at' => now(),
+                'password' => Hash::make('password'),
+            ]
+        );
+
+        User::firstOrCreate(
+            ['email' => 'investigator@umutekano.test'],
+            [
+                'full_name' => 'Jean Investigator',
+                'name' => 'Jean Investigator',
+                'phone' => '0780000002',
+                'role' => 'investigator',
+                'is_active' => true,
+                'email_verified_at' => now(),
+                'password' => Hash::make('password'),
+            ]
+        );
+
+        User::firstOrCreate(
+            ['email' => 'witness@umutekano.test'],
+            [
+                'full_name' => 'Sample Witness',
+                'name' => 'Sample Witness',
+                'phone' => '0780000003',
+                'role' => 'witness',
+                'is_active' => true,
+                'email_verified_at' => now(),
+                'password' => Hash::make('password'),
+            ]
+        );
     }
 }

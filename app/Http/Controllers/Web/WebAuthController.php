@@ -17,6 +17,11 @@ class WebAuthController extends Controller
         return view('Auth.login');
     }
 
+    public function  register_form(){
+        return view('Auth.register');
+    }
+
+
     public function forgot_password()
     {
         return view('Auth.forgot-password');
@@ -49,6 +54,10 @@ class WebAuthController extends Controller
 
     }
 
+    public function submit_register(){
+        return "submit register";
+    }
+
     public function submit_forgot_password(Request $request){
         try {
             // Validate email input
@@ -68,7 +77,7 @@ class WebAuthController extends Controller
             if (!$existsInAdmins && !$existsInUsers) {
                 return back()->with([
                     'status' => 'error',
-                    'message' => 'Imeyili ntibonetse mububiko !',
+                    'message' => 'Email not found in our database !',
                 ], 404); // Not Found
             }
 
@@ -96,7 +105,7 @@ class WebAuthController extends Controller
 
             return back()->with([
                 'status' => 'success',
-                'reset_code' => 'kode yoherejwe kuri imeyili.',
+                'reset_code' => 'check code on your email.',
             ]); // OK
 
         } catch (\Illuminate\Validation\ValidationException $e) {
@@ -126,7 +135,7 @@ class WebAuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('owner.login')->with('info', 'You have been logged out.');
+        return redirect()->route('login')->with('info', 'You have been logged out.');
     }
 
 }

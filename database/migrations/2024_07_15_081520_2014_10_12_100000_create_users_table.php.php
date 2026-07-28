@@ -13,22 +13,15 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('user_code')->nullable();
-            $table->string('user_name')->nullable();
-            $table->string('provider_name')->nullable();
-            $table->string('provider_id')->unique()->nullable();
-            $table->string('firstname')->nullable();
-            $table->string('lastname')->nullable();
-            $table->string('email')->unique()->nullable();
-            $table->string('image')->nullable();
-            $table->string('gender')->nullable();
-            $table->string('phone')->unique()->nullable();
-            $table->string('provider_token')->unique()->nullable();
-            $table->string('birthdate')->nullable();
+            $table->string('full_name');
+            $table->string('name')->nullable(); // alias kept for compatibility with older views
+            $table->string('email')->unique();
+            $table->string('phone', 15)->nullable();
+            $table->enum('role', ['witness', 'investigator', 'admin'])->default('witness');
+            $table->boolean('is_active')->default(true);
             $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
             $table->rememberToken();
-            $table->string('password')->nullable();
-            $table->timestamp('last_active_at')->nullable();
             $table->timestamps();
         });
 

@@ -1,24 +1,24 @@
 @extends('Auth.cover')
 @section('content')
 <style>
-	.btn[data-loading="true"]{
-		pointer-events: none;
-		opacity: 0.85;
-	}
-	.btn-spinner{
-		width: 16px;
-		height: 16px;
-		border: 2px solid rgba(255,255,255,0.35);
-		border-top-color: #fff;
-		border-radius: 50%;
-		animation: btn-spin 0.6s linear infinite;
-		display: none;
-	}
-	.btn[data-loading="true"] .btn-spinner{ display: inline-block; }
-	.btn[data-loading="true"] .btn-label{ opacity: 0.85; }
-	@keyframes btn-spin{
-		to{ transform: rotate(360deg); }
-	}
+    .btn[data-loading="true"]{
+        pointer-events: none;
+        opacity: 0.85;
+    }
+    .btn-spinner{
+        width: 16px;
+        height: 16px;
+        border: 2px solid rgba(255,255,255,0.35);
+        border-top-color: #fff;
+        border-radius: 50%;
+        animation: btn-spin 0.6s linear infinite;
+        display: none;
+    }
+    .btn[data-loading="true"] .btn-spinner{ display: inline-block; }
+    .btn[data-loading="true"] .btn-label{ opacity: 0.85; }
+    @keyframes btn-spin{
+        to{ transform: rotate(360deg); }
+    }
 </style>
 <header class="nav">
   <div class="container nav-row">
@@ -100,72 +100,72 @@
       @endif
 
       <form action="{{ route('submit.login') }}" method="POST" data-validate novalidate>
-		  @csrf
+          @csrf
 
-		  <div class="field {{ $errors->has('username') ? 'invalid' : '' }}">
-		    <label for="login-email">Email or phone number</label>
+          <div class="field {{ $errors->has('username') ? 'invalid' : '' }}">
+            <label for="login-email">Email or phone number</label>
 
-		    <div class="input-wrap has-icon">
-		      <span class="input-icon">
-		        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-		          <rect x="3" y="5" width="18" height="14" rx="2"/>
-		          <path d="m3 7 9 6 9-6"/>
-		        </svg>
-		      </span>
+            <div class="input-wrap has-icon">
+              <span class="input-icon">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <rect x="3" y="5" width="18" height="14" rx="2"/>
+                  <path d="m3 7 9 6 9-6"/>
+                </svg>
+              </span>
 
-		      <input
-		        type="text"
-		        id="login-email"
-		        name="username"
-		        value="{{ old('username') }}"
-		        placeholder="Enter email or phone number"
-		        required
-		      >
-		    </div>
+              <input
+                type="text"
+                id="login-email"
+                name="username"
+                value="{{ old('username') }}"
+                placeholder="Enter email or phone number"
+                required
+              >
+            </div>
 
-		    <p class="error-text">
-		      {{ $errors->first('username') ?: 'Enter the email or phone number linked to your account.' }}
-		    </p>
-		  </div>
+            <p class="error-text">
+              {{ $errors->first('username') ?: 'Enter the email or phone number linked to your account.' }}
+            </p>
+          </div>
 
-		  <div class="field {{ $errors->has('password') ? 'invalid' : '' }}">
-		    <div class="field-row" style="margin-bottom:7px;">
-		      <label for="login-password" style="margin-bottom:0;">Password</label>
-		      <a href="{{ route('forgot-password') }}" class="link-sm">Forgot password?</a>
-		    </div>
+          <div class="field {{ $errors->has('password') ? 'invalid' : '' }}">
+            <div class="field-row" style="margin-bottom:7px;">
+              <label for="login-password" style="margin-bottom:0;">Password</label>
+              <a href="{{ route('forgot-password') }}" class="link-sm">Forgot password?</a>
+            </div>
 
-		    <div class="input-wrap">
-		      <input
-		        type="password"
-		        id="login-password"
-		        name="password"
-		        placeholder="Enter your password"
-		        required
-		      >
+            <div class="input-wrap">
+              <input
+                type="password"
+                id="login-password"
+                name="password"
+                placeholder="Enter your password"
+                required
+              >
 
-		      <button type="button" class="input-toggle" aria-label="Show password">
-		        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-		          <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/>
-		          <circle cx="12" cy="12" r="3"/>
-		        </svg>
-		      </button>
-		    </div>
+              <button type="button" class="input-toggle" aria-label="Show password">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
+              </button>
+            </div>
 
-		    <p class="error-text">
-		      {{ $errors->first('password') ?: 'Enter your password to continue.' }}
-		    </p>
-		  </div>
+            <p class="error-text">
+              {{ $errors->first('password') ?: 'Enter your password to continue.' }}
+            </p>
+          </div>
 
-		  <div class="check-row" style="margin-top:6px;">
-		    <input type="checkbox" id="remember" name="remember">
-		    <label for="remember">Keep me signed in on this device</label>
-		  </div>
+          <div class="check-row" style="margin-top:6px;">
+            <input type="checkbox" id="remember" name="remember">
+            <label for="remember">Keep me signed in on this device</label>
+          </div>
 
-		  <button type="submit" class="btn btn-primary btn-block btn-lg" id="login-submit">
-		    <span class="btn-spinner"></span>
-		    <span class="btn-label">Log in</span>
-		  </button>
-	  </form>
+          <button type="submit" class="btn btn-primary btn-block btn-lg" id="login-submit">
+            <span class="btn-spinner"></span>
+            <span class="btn-label">Log in</span>
+          </button>
+      </form>
 
       <div class="divider-row">or</div>
 
@@ -181,7 +181,16 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('form[data-validate]').forEach(form => {
+  document.querySelectorAll('form[data-validate]').forEach(originalForm => {
+
+    // The shared Guest/assets/script.js file also attaches a submit handler to
+    // every form[data-validate] (leftover from the pre-backend static mockups --
+    // it preventDefault()s and hides the form looking for a mock success panel).
+    // That conflicts with this page's real Laravel submission. Cloning the node
+    // drops any previously-attached JS listeners (attributes/children are kept,
+    // event listeners are not), so only the handlers set up below apply here.
+    const form = originalForm.cloneNode(true);
+    originalForm.parentNode.replaceChild(form, originalForm);
 
     form.querySelectorAll('.input-toggle').forEach(btn => {
       btn.addEventListener('click', () => {

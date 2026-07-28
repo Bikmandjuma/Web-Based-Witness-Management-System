@@ -18,7 +18,10 @@
             <td class="ref-code">{{ $report->reference() }}</td>
             <td>{{ $report->incident_type }}</td>
             <td>{{ $report->location }}</td>
-            <td>{{ $report->date_reported->format('d M Y') }}</td>
+            <!-- <td>{{ $report->date_reported->format('d M Y') }}</td> -->
+            <td>
+                {{ \Carbon\Carbon::parse($report->date_reported)->format('d M Y') }}
+            </td>
             <td><span class="badge {{ $report->statusBadgeColor() }}">{{ $report->status }}</span></td>
             <td><a href="{{ route('witness.reports.show', $report) }}" style="color:var(--primary); font-weight:600;">View</a></td>
           </tr>

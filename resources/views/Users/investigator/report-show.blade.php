@@ -11,9 +11,14 @@
           <div>
             <p class="ref-code">{{ $report->reference() }}</p>
             <h1 style="font-family:var(--font-display); font-size:20px; margin-top:4px;">{{ $report->incident_type }}</h1>
+            
             <p style="font-size:13px; color:var(--ink-faint);">
-              Filed by {{ $report->witness->full_name }} &middot; {{ $report->location }} &middot;
-              {{ $report->date_reported->format('d M Y, H:i') }}
+                Filed by {{ $report->witness->full_name }} &middot;
+                {{ $report->location }} &middot;
+                {{ $report->date_reported
+                    ? \Carbon\Carbon::parse($report->date_reported)->format('d M Y, H:i')
+                    : 'N/A'
+                }}
             </p>
           </div>
           <span class="badge {{ $report->statusBadgeColor() }}">{{ $report->status }}</span>
@@ -39,11 +44,20 @@
             <p style="font-size:11.5px; font-weight:700; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.05em; margin-bottom:8px;">History</p>
             <ul style="font-size:12.5px; color:var(--ink-soft); line-height:1.8; padding-left:0; list-style:none;">
               @foreach ($report->statusLogs as $log)
+                
                 <li>
-                  {{ $log->updated_at->format('d M, H:i') }} —
-                  {{ $log->updatedBy->full_name }} changed status
-                  @if($log->old_status) from <strong>{{ $log->old_status }}</strong> @endif
-                  to <strong>{{ $log->new_status }}</strong>
+                    {{ $log->updated_at
+                        ? \Carbon\Carbon::parse($log->updated_at)->format('d M, H:i')
+                        : 'N/A'
+                    }}
+                    —
+                    {{ $log->updatedBy->full_name }} changed status
+
+                    @if($log->old_status)
+                        from <strong>{{ $log->old_status }}</strong>
+                    @endif
+
+                    to <strong>{{ $log->new_status }}</strong>
                 </li>
               @endforeach
             </ul>

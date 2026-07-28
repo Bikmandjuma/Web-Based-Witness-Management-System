@@ -35,7 +35,9 @@
         @forelse ($recentActivity as $log)
           <div style="padding:12px 20px; border-top:1px solid var(--border); font-size:13.5px;">
             <p>{{ $log->description }}</p>
-            <p style="font-size:11.5px; color:var(--ink-faint); margin-top:2px;">{{ $log->created_at->diffForHumans() }}</p>
+            <p style="font-size:11.5px; color:var(--ink-faint); margin-top:2px;">
+                {{ \Carbon\Carbon::parse($log->created_at)->diffForHumans() }}
+            </p>
           </div>
         @empty
           <p class="empty-row">No activity recorded yet.</p>

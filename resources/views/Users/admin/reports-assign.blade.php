@@ -13,7 +13,9 @@
             <td class="ref-code">{{ $report->reference() }}</td>
             <td>{{ $report->witness->full_name }}</td>
             <td>{{ $report->incident_type }}</td>
-            <td>{{ $report->date_reported->format('d M Y') }}</td>
+            <tr>
+                <td>{{ \Carbon\Carbon::parse($report->date_reported)->format('d M Y') }}</td>
+            </tr>
             <td>
               <form method="POST" action="{{ route('admin.reports.assign.store', $report) }}" class="form-inline">
                 @csrf @method('PATCH')

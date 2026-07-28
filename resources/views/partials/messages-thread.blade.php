@@ -6,7 +6,10 @@
       <div class="msg-bubble {{ $message->sender_id === auth()->id() ? 'msg-mine' : 'msg-theirs' }}">
         <p class="msg-meta">{{ $message->sender->full_name ?? $message->sender->name }}</p>
         <p>{{ $message->content }}</p>
-        <p class="msg-meta" style="margin-top:4px; font-weight:400;">{{ $message->sent_at->format('d M, H:i') }}</p>
+        <!-- <p class="msg-meta" style="margin-top:4px; font-weight:400;">{{ $message->sent_at->format('d M, H:i') }}</p> -->
+        <p class="msg-meta" style="margin-top:4px; font-weight:400;">
+            {{ \Carbon\Carbon::parse($message->sent_at)->format('d M, H:i') }}
+        </p>
       </div>
     @empty
       <p class="empty-row">No messages yet.</p>
